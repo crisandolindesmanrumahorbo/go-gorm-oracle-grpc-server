@@ -1,0 +1,38 @@
+// proto/user.proto
+syntax="proto3";
+
+package proto;
+
+option go_package="github.com/gorm-oracle";
+
+message User {
+    string firstname =1;
+    uint32 age =2;
+    Address address =3;
+}
+
+message Address {
+    string city =1;
+    string zipCode =2;
+}
+
+message CreateUserRequest {
+    User user =1;
+}
+
+message CreateUserResponses {
+    int64 id =1;
+}
+
+message ReadUserRequest {
+    int64 id = 1;
+}
+
+message ReadUserResponse {
+    User user =1;
+}
+
+service UserService {
+    rpc CreateUser (CreateUserRequest) returns (CreateUserResponses);
+    rpc GetUser (ReadUserRequest) returns (ReadUserResponse);
+}
